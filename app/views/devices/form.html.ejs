@@ -1,0 +1,68 @@
+<div class="control-group">
+  <label for="name" class="control-label">name</label>
+  <div class="controls">
+    <%- contentTag('input', device.name, {type:'text', class:'span6', name:'name'}) %>
+  </div>
+</div>
+<div class="control-group">
+  <label for="udid" class="control-label">udid</label>
+  <div class="controls">
+    <%- contentTag('input', device.udid, {type:'text', class:'span6', name:'udid'}) %>
+  </div>
+</div>
+<div class="control-group">
+  <label for="platform" class="control-label">platform</label>
+  <div class="controls">
+    <%- contentTag('input', device.platform, {type:'text', class:'span6', name:'platform'}) %>
+  </div>
+</div>
+<div class="control-group">
+  <label for="osVersion" class="control-label">osVersion</label>
+  <div class="controls">
+    <%- contentTag('input', device.osVersion, {type:'text', class:'span6', name:'osVersion'}) %>
+  </div>
+</div>
+<div class="control-group">
+  <label for="description" class="control-label">description</label>
+  <div class="controls">
+    <%- contentTag('input', device.description, {type:'text', class:'span6', name:'description'}) %>
+  </div>
+</div>
+<div class="control-group">
+  <label for="office" class="control-label">office</label>
+  <div class="controls">
+    <%- contentTag('input', device.office, {type:'text', class:'span6', name:'office'}) %>
+  </div>
+</div>
+<div class="control-group">
+  <label for="location" class="control-label">location</label>
+  <div class="controls">
+    object
+  </div>
+</div>
+<div class="control-group">
+  <label for="user" class="control-label">user</label>
+  <div class="controls">
+    object
+  </div>
+</div>
+<div class="control-group">
+  <label for="checkedOut" class="control-label">checkedOut</label>
+  <div class="controls">
+    <select name="checkedOut", class="span1">
+      <% if(device.checkedOut) { -%>
+      <option>false</option>
+      <option selected>true</option>
+      <% } else { -%>
+      <option selected>false</option>
+      <option>true</option>
+      <% } -%>
+    </select>
+  </div>
+</div>
+<div class="control-group">
+  <label for="checkoutTime" class="control-label">checkoutTime</label>
+  <div class="controls">
+    <%- contentTag('input', device.checkoutTime, {type:'datetime', class:'span3', name:'checkoutTime'}) %>
+  </div>
+</div>
