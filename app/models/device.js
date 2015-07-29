@@ -7,7 +7,7 @@ var Device = function () {
     osVersion: {type: 'string'},
     description: {type: 'string'},
     office: {type: 'string'},
-    location: {type: 'object'},
+    zone: {type: 'string'},
     user: {type: 'object'},
     checkedOut: {type: 'boolean'},
     checkoutTime: {type: 'datetime'}
