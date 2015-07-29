@@ -40,4 +40,5 @@ router.get('/').to('Main.index');
 // });
 
 router.resource('devices');
+router.resource('users');
 exports.router = router;
