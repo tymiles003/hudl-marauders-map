@@ -46,8 +46,8 @@ router.post('/devices(.:format)').to('devices.create')
 router.put('/devices/:udid(.:format)').to('devices.update')
 router.del('/devices/:udid(.:format)').to('devices.destroy')
 
-router.get('/devices/:udid(.:format)/checkout').to('devices.checkout')
-router.get('/devices/:udid(.:format)/checkin').to('devices.checkin')
+router.put('/devices/:udid(.:format)/checkout').to('devices.checkout')
+router.put('/devices/:udid(.:format)/checkin').to('devices.checkin')
 
 router.resource('users');
 
