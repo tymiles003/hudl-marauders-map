@@ -43,7 +43,7 @@ router.get('/devices/add(.:format)').to('devices.add')
 router.get('/devices/:udid(.:format)').to('devices.show')
 router.get('/devices/:udid/edit(.:format)').to('devices.edit')
 router.post('/devices(.:format)').to('devices.create')
-router.put('/devices/:id(.:format)').to('devices.update')
+router.put('/devices/:udid(.:format)').to('devices.update')
 router.del('/devices/:udid(.:format)').to('devices.destroy')
 
 router.resource('users');

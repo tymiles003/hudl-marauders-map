@@ -68,7 +68,7 @@ var Devices = function () {
   this.update = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Device.first(params.id, function(err, device) {
+    geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
         throw err;
       }
@@ -108,7 +108,7 @@ var Devices = function () {
       }
     });
   };
-  
+
 };
 
 exports.Devices = Devices;
