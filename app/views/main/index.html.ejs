@@ -32,9 +32,11 @@
       <% if (devicesByZone) { %>
         <% Array.prototype.forEach.call(Object.keys(devicesByZone), function(zone){ %>
           <h3><%- zone %></h3>
-          <% Array.prototype.forEach.call(devicesByZone[zone], function(device){ %>
-            <h4><%- device.name %></h4>
-          <% }); %>
+          <% if (devicesByZone[zone]) {%>
+            <% Array.prototype.forEach.call(devicesByZone[zone], function(device){ %>
+              <h4><%- device.name %></h4>
+            <% }); %>
+          <% } %>
         <% }); %>
       <% } %>
       </div>
