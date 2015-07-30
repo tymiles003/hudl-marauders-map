@@ -16,7 +16,6 @@
  *
 */
 
-
 var router = new geddy.RegExpRouter();
 
 router.get('/').to('Main.index');
@@ -39,6 +38,14 @@ router.get('/').to('Main.index');
 //   this.get('/print(.:format)').to('Hemispheres.print');
 // });
 
-router.resource('devices');
+router.get('/devices(.:format)').to('devices.index')
+router.get('/devices/add(.:format)').to('devices.add')
+router.get('/devices/:udid(.:format)').to('devices.show')
+router.get('/devices/:udid/edit(.:format)').to('devices.edit')
+router.post('/devices(.:format)').to('devices.create')
+router.put('/devices/:id(.:format)').to('devices.update')
+router.del('/devices/:udid(.:format)').to('devices.destroy')
+
 router.resource('users');
+
 exports.router = router;

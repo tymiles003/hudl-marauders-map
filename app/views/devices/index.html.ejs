@@ -8,7 +8,7 @@
 <% for (var i = 0, ii = devices.length; i < ii; i++) { %>
   <div class="row list-item" id="device-<%= devices[i].id; %>">
     <div class="span8">
-      <h3><%- linkTo(devices[i].name, devicePath(devices[i].id)); %></h3>
+      <h3><%- linkTo(devices[i].name, devicePath(devices[i].udid)); %></h3>
     </div>
     <div class="span4">
       <h3><i class="icon-list-alt"></i><%= devices[i].id; %></h3>
