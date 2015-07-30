@@ -1,6 +1,12 @@
-#map-image {
-  background-image: url("../img/hudl-east-1.png");
-  height: 260px;
-  width: 720px;
-  background-size: 720px 260px;
+.east-1-map {
+  position: absolute;
+  width: 50%;
+}
+
+img.inactive {
+  opacity: 0.25;
+}
+
+img.active {
+  opacity: 0.80;
 }
