@@ -1,6 +1,43 @@
-<!-- Lets talk about geddy -->
-<div class="hero-unit geddy-welcome-box">
-  <h1>Hello, World!</h1>
-  <p>You've created a Geddy app and your server is running. If you already know what you're doing, feel free to jump into your app logic, if not...</p>
-  <p><%- linkTo('Lets get you started »', 'http://geddyjs.org/tutorial.html', {class: 'btn btn-primary btn-large'}) %></p>
+<div class="container">
+  <div class="row">
+    <div class="span8">
+      Platforms
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#">All</a></li>
+        <% if (devicePlatforms) { %>
+          <% devicePlatforms.forEach( function(platform){ %>
+            <li><a href="#"><%- platform %></a></li>
+          <% }); %>
+        <% } %>
+      </ul>
+      Offices
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#">All</a></li>
+        <% if (deviceOffices) { %>
+          <% deviceOffices.forEach( function(office){ %>
+            <li><a href="#"><%- office %></a></li>
+          <% }); %>
+        <% } %>
+      </ul>
+      Availability
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#">All</a></li>
+        <li><a href="#">Checked In</a></li>
+        <li><a href="#">Checked Out</a></li>
+      </ul>
+      <div id="map-image"></div>
+    </div>
+    <div class="span4">
+      <div id="devices-list">
+      <% if (devicesByZone) { %>
+        <% Array.prototype.forEach.call(Object.keys(devicesByZone), function(zone){ %>
+          <h3><%- zone %></h3>
+          <% Array.prototype.forEach.call(devicesByZone[zone], function(device){ %>
+            <h4><%- device.name %></h4>
+          <% }); %>
+        <% }); %>
+      <% } %>
+      </div>
+    </div>
+  </div>
 </div>
