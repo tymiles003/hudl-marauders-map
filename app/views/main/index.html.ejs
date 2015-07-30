@@ -9,19 +9,19 @@
     <div class="filter-container">
       <span>Platforms</span>
       <ul id="platform-filter" class="nav nav-pills">
-        <li class="active"><a href="#">All</a></li>
+        <li class="active" onclick="clickPill(this)"><a href="#">All</a></li>
         <% if (devicePlatforms) { %>
           <% devicePlatforms.forEach( function(platform){ %>
-            <li><a href="#"><%- platform %></a></li>
+            <li onclick="clickPill(this)"><a href="#"><%- platform %></a></li>
           <% }); %>
         <% } %>
       </ul>
       <span>Offices</span>
       <ul id="office-filter" class="nav nav-pills">
-        <li class="active"><a href="#">All</a></li>
+        <li class="active" onclick="clickPill(this)"><a href="#">All</a></li>
         <% if (deviceOffices) { %>
           <% deviceOffices.forEach( function(office){ %>
-            <li><a href="#"><%- office %></a></li>
+            <li onclick="clickPill(this)"><a href="#"><%- office %></a></li>
           <% }); %>
         <% } %>
       </ul>
