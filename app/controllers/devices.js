@@ -129,7 +129,7 @@ var Devices = function () {
           if (err) {
             throw err;
           }
-          self.redirect({controller: 'devices', action: 'show', udid: device.udid});
+          self.respondWith(device);
         });
       }
     });
@@ -154,7 +154,7 @@ var Devices = function () {
           if (err) {
             throw err;
           }
-          self.redirect({controller: 'devices', action: 'show', udid: device.udid});
+          self.respondWith(device);
         });
       }
     });
