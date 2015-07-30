@@ -28,26 +28,18 @@ var Main = function () {
       allDevices = devices;
     });
 
-    // organize devices by zone
-    var devicesByZone = {};
     // get all platforms for devices
     var devicePlatforms = new Set();
     // get all offices for devices
     var deviceOffices = new Set();
     if (allDevices) {
       Array.prototype.forEach.call(allDevices, function(device) {
-        if (!devicesByZone.hasOwnProperty(device.zone)) {
-          devicesByZone[device.zone] = [];
-        }
-        devicesByZone[device.zone].push(device);
-
         devicePlatforms.add(device.platform);
         deviceOffices.add(device.office);
       });
     }
 
-    this.respond({params: params, devicesByZone: devicesByZone,
-                    devicePlatforms: devicePlatforms, deviceOffices: deviceOffices}, {
+    this.respond({params: params, devices: allDevices, devicePlatforms: devicePlatforms, deviceOffices: deviceOffices}, {
       format: 'html'
     , template: 'app/views/main/index'
     });

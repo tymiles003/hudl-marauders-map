@@ -1,54 +1,46 @@
-<div class="container">
-  <div class="row">
-    <div class="span8">
-      <div class="filter-container">
-        Platforms
-        <ul class="nav nav-pills">
-          <li class="active"><a href="#">All</a></li>
-          <% if (devicePlatforms) { %>
-            <% devicePlatforms.forEach( function(platform){ %>
-              <li><a href="#"><%- platform %></a></li>
-            <% }); %>
-          <% } %>
-        </ul>
-        Offices
-        <ul class="nav nav-pills">
-          <li class="active"><a href="#">All</a></li>
-          <% if (deviceOffices) { %>
-            <% deviceOffices.forEach( function(office){ %>
-              <li><a href="#"><%- office %></a></li>
-            <% }); %>
-          <% } %>
-        </ul>
-        Availability
-        <ul class="nav nav-pills">
-          <li class="active"><a href="#">All</a></li>
-          <li><a href="#">Checked In</a></li>
-          <li><a href="#">Checked Out</a></li>
-        </ul>
-      </div>
-      <div id="map-container">
-        <img id="hudl-east-1" class="east-1-map" src="../img/hudl-zones/hudl-east-1.png"></img>
-        <img id="hudl-east-1-east" class="east-1-map zone-map zone-east inactive" src="../img/hudl-zones/hudl-east-1-east.png"></img>
-        <img id="hudl-east-1-west" class="east-1-map zone-map zone-west inactive" src="../img/hudl-zones/hudl-east-1-west.png"></img>
-        <img id="hudl-east-1-cart" class="east-1-map zone-map zone-cart inactive" src="../img/hudl-zones/hudl-east-1-cart.png"></img>
-      </div>
+<script>
+  localStorage.devices = '[<%- devices %>]';
+  document.addEventListener("DOMContentLoaded", function() {
+    buildDeviceListDOM();
+  });
+</script>
+<div class="row">
+  <div class="span8">
+    <div class="filter-container">
+      <span>Platforms</span>
+      <ul id="platform-filter" class="nav nav-pills">
+        <li class="active"><a href="#">All</a></li>
+        <% if (devicePlatforms) { %>
+          <% devicePlatforms.forEach( function(platform){ %>
+            <li><a href="#"><%- platform %></a></li>
+          <% }); %>
+        <% } %>
+      </ul>
+      <span>Offices</span>
+      <ul id="office-filter" class="nav nav-pills">
+        <li class="active"><a href="#">All</a></li>
+        <% if (deviceOffices) { %>
+          <% deviceOffices.forEach( function(office){ %>
+            <li><a href="#"><%- office %></a></li>
+          <% }); %>
+        <% } %>
+      </ul>
+      <span>Availability</span>
+      <ul id="availability-filter" class="nav nav-pills">
+        <li class="active" onclick="clickPill(this)"><a href="#">All</a></li>
+        <li onclick="clickPill(this)"><a href="#">Checked In</a></li>
+        <li onclick="clickPill(this)"><a href="#">Checked Out</a></li>
+      </ul>
     </div>
-    <div class="span4">
-      <div id="devices-list">
-      <% if (devicesByZone) { %>
-        <% Array.prototype.forEach.call(Object.keys(devicesByZone), function(zone){ %>
-          <div class="zone-container" onmouseover="zoneHover('<%- zone %>')" onmouseout="zoneHover('')">
-            <h3><%- zone %></h3>
-            <% if (devicesByZone[zone]) {%>
-              <% Array.prototype.forEach.call(devicesByZone[zone], function(device){ %>
-                <h4><%- device.name %></h4>
-              <% }); %>
-            <% } %>
-          </div>
-        <% }); %>
-      <% } %>
-      </div>
+    <div id="map-container">
+      <img id="hudl-east-1" class="east-1-map" src="../img/hudl-zones/hudl-east-1.png"></img>
+      <img id="hudl-east-1-east" class="east-1-map zone-map zone-east inactive" src="../img/hudl-zones/hudl-east-1-east.png"></img>
+      <img id="hudl-east-1-west" class="east-1-map zone-map zone-west inactive" src="../img/hudl-zones/hudl-east-1-west.png"></img>
+      <img id="hudl-east-1-cart" class="east-1-map zone-map zone-cart inactive" src="../img/hudl-zones/hudl-east-1-cart.png"></img>
+    </div>
+  </div>
+  <div class="span4">
+    <div id="devices-list">
     </div>
   </div>
 </div>
