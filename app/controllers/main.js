@@ -18,7 +18,34 @@
 
 var Main = function () {
   this.index = function (req, resp, params) {
-    this.respond({params: params}, {
+
+    // get all devices
+    var allDevices;
+    geddy.model.Device.all(function(err, devices) {
+      if (err) {
+        throw err;
+      }
+      allDevices = devices;
+    });
+
+    // organize devices by zone
+    var devicesByZone = {};
+    // get all platforms for devices
+    var devicePlatforms = new Set();
+    // get all offices for devices
+    var deviceOffices = new Set();
+    Array.prototype.forEach.call(allDevices, function(device) {
+      if (!devicesByZone.hasOwnProperty(device.zone)) {
+        devicesByZone[device.zone] = [];
+      }
+      devicesByZone[device.zone].push(device);
+
+      devicePlatforms.add(device.platform);
+      deviceOffices.add(device.office);
+    });
+
+    this.respond({params: params, devicesByZone: devicesByZone,
+                    devicePlatforms: devicePlatforms, deviceOffices: deviceOffices}, {
       format: 'html'
     , template: 'app/views/main/index'
     });
@@ -26,5 +53,3 @@ var Main = function () {
 };
 
 exports.Main = Main;
-
-
