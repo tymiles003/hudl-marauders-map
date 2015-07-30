@@ -34,15 +34,17 @@ var Main = function () {
     var devicePlatforms = new Set();
     // get all offices for devices
     var deviceOffices = new Set();
-    Array.prototype.forEach.call(allDevices, function(device) {
-      if (!devicesByZone.hasOwnProperty(device.zone)) {
-        devicesByZone[device.zone] = [];
-      }
-      devicesByZone[device.zone].push(device);
+    if (allDevices) {
+      Array.prototype.forEach.call(allDevices, function(device) {
+        if (!devicesByZone.hasOwnProperty(device.zone)) {
+          devicesByZone[device.zone] = [];
+        }
+        devicesByZone[device.zone].push(device);
 
-      devicePlatforms.add(device.platform);
-      deviceOffices.add(device.office);
-    });
+        devicePlatforms.add(device.platform);
+        deviceOffices.add(device.office);
+      });
+    }
 
     this.respond({params: params, devicesByZone: devicesByZone,
                     devicePlatforms: devicePlatforms, deviceOffices: deviceOffices}, {
