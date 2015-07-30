@@ -42,7 +42,11 @@
             <h3><%- zone %></h3>
             <% if (devicesByZone[zone]) {%>
               <% Array.prototype.forEach.call(devicesByZone[zone], function(device){ %>
-                <h4><%- device.name %></h4>
+                <% if (device.checkedOut) {%>
+                  <a href="#" style="color:gray;" data-toggle="modal" data-target="#checkoutModal"><%- device.name %></a>
+                <% } else {%>
+                  <a href="#" data-toggle="modal" data-target="#checkoutModal"><%- device.name %></a>
+                <% } %>
               <% }); %>
             <% } %>
           </div>

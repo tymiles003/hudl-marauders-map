@@ -20,13 +20,20 @@ var Main = function () {
   this.index = function (req, resp, params) {
 
     // get all devices
-    var allDevices;
+    var allDevices, allUsers;
     geddy.model.Device.all(function(err, devices) {
       if (err) {
         throw err;
       }
       allDevices = devices;
     });
+
+    geddy.model.User.all(function(err, users) {
+      if (err) {
+        throw err;
+      }
+      allUsers = users;
+    })
 
     // organize devices by zone
     var devicesByZone = {};
@@ -46,8 +53,12 @@ var Main = function () {
       });
     }
 
-    this.respond({params: params, devicesByZone: devicesByZone,
-                    devicePlatforms: devicePlatforms, deviceOffices: deviceOffices}, {
+    this.respond({params: params,
+                  devicesByZone: devicesByZone,
+                  devicePlatforms: devicePlatforms,
+                  deviceOffices: deviceOffices,
+                  users: allUsers,
+                  }, {
       format: 'html'
     , template: 'app/views/main/index'
     });
