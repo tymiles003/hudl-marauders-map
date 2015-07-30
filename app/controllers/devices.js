@@ -36,7 +36,7 @@ var Devices = function () {
   this.show = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Device.first(params.id, function(err, device) {
+    geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
         throw err;
       }
@@ -52,7 +52,7 @@ var Devices = function () {
   this.edit = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Device.first(params.id, function(err, device) {
+    geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
         throw err;
       }
@@ -68,7 +68,7 @@ var Devices = function () {
   this.update = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Device.first(params.id, function(err, device) {
+    geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
         throw err;
       }
@@ -91,7 +91,7 @@ var Devices = function () {
   this.remove = function (req, resp, params) {
     var self = this;
 
-    geddy.model.Device.first(params.id, function(err, device) {
+    geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
         throw err;
       }
@@ -99,7 +99,7 @@ var Devices = function () {
         throw new geddy.errors.BadRequestError();
       }
       else {
-        geddy.model.Device.remove(params.id, function(err) {
+        geddy.model.Device.remove({udid: params.udid}, function(err) {
           if (err) {
             throw err;
           }
@@ -108,6 +108,57 @@ var Devices = function () {
       }
     });
   };
+
+  this.checkout = function (req, resp, params) {
+    var self = this;
+
+    geddy.model.Device.first({udid: params.udid}, function(err, device) {
+      if (err) {
+        throw err;
+      }
+
+      if (!device.checkedOut) {
+        device.checkedOut = true;
+        device.checkoutTime = new Date();
+      }
+
+      if (!device.isValid()) {
+        geddy.log.error("error updating device during checkout");
+      } else {
+        device.save(function(err, data) {
+          if (err) {
+            throw err;
+          }
+          self.redirect({controller: 'devices', action: 'show', udid: device.udid});
+        });
+      }
+    });
+  }
+
+  this.checkin = function (req, resp, params) {
+    var self = this;
+
+    geddy.model.Device.first({udid: params.udid}, function(err, device) {
+      if (err) {
+        throw err;
+      }
+
+      if (device.checkedOut) {
+        device.checkedOut = false;
+      }
+
+      if (!device.isValid()) {
+        geddy.log.error("error updating device during checkin");
+      } else {
+        device.save(function(err, data) {
+          if (err) {
+            throw err;
+          }
+          self.redirect({controller: 'devices', action: 'show', udid: device.udid});
+        });
+      }
+    });
+  }
 
 };
 

@@ -3,7 +3,7 @@ var Device = function () {
 
   this.defineProperties({
     name: {type: 'string', required: true},
-    udid: {type: 'string'},
+    udid: {type: 'string', required: true},
     platform: {type: 'string'},
     osVersion: {type: 'string'},
     description: {type: 'string'},
