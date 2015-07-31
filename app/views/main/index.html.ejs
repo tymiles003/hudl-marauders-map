@@ -1,14 +1,20 @@
 <script>
   localStorage.devices = '[<%- devices %>]';
   document.addEventListener("DOMContentLoaded", function() {
+    // build the initial device list
     buildDeviceListDOM();
+    // use selectize for user select
     $('#user-select').selectize({
       onItemAdd : function(value) {updateModalUser(value);}
     });
+    // get and set height
+    var leftArea = document.getElementById("left-area");
+    var search = document.getElementById("device-search-panel-body");
+    search.style.height = leftArea.scrollHeight+"px";
   });
 </script>
 <div class="row">
-  <div class="col-md-8">
+  <div id="left-area" class="col-md-8">
     <div class="panel panel-warning">
       <div class="panel-heading">
         <h3 class="panel-title">Filters</h3>
@@ -56,14 +62,14 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div id="right-area" class="col-md-4">
     <div class="panel panel-warning">
-      <div id="panel-body">
+      <div id="device-search-panel-body">
         <div class="form-group has-warning inner-addon left-addon">
           <i class="fa fa-search"></i>
           <input class="form-control" onkeyup='updateSearch(event)' placeholder='Search by device name, platform, or OS version' id="focusedInput" type="text" value="">
         </div>
-        <div id="panel-body">
+        <div id="device-list-panel-body">
           <div id="devices-list">
           </div>
         </div>
