@@ -17,18 +17,37 @@ var Devices = function () {
   };
 
   this.create = function (req, resp, params) {
-    var self = this
-      , device = geddy.model.Device.create(params);
+    var self = this;
+
+    var device;
+    geddy.model.Device.first({udid: params.udid}, function(err, existingDevice) {
+      if (err) {
+        throw err;
+      }
+      if (existingDevice) {
+        device = existingDevice;
+      }
+    });
+
+    if (device) {
+      geddy.log.info("existing device with provided udid found; updating from params");
+      device.updateProperties(params);
+    } else {
+      geddy.log.info("no device found with that udid; creating a new device");
+      device = geddy.model.Device.create(params);
+    }
 
     if (!device.isValid()) {
-      this.respondWith(device);
+      geddy.log.error("provided device params are invalid");
+      self.respondWith(device);
     }
     else {
       device.save(function(err, data) {
         if (err) {
+          geddy.log.error("problem saving new device");
           throw err;
         }
-        self.respondWith(device, {status: err});
+        self.respond(device, {format: 'json'});
       });
     }
   };

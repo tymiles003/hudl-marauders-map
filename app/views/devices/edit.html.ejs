@@ -1,5 +1,5 @@
 <div class="hero-unit">
-  <form id="device-form" class="form-horizontal" action="/devices/<%= params.udid %>?_method=PUT" method="POST">
+  <form id="device-form" class="form-horizontal" action="/devices/<%= params.udid %>?_method=PUT" method="PUT">
     <fieldset>
       <legend>Update this Device</legend>
       <% if(params.errors) { %>
