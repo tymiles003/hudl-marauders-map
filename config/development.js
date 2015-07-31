@@ -38,8 +38,7 @@ var config = {
     defaultAdapter: 'filesystem'
   }
 , sessions: {
-    store: 'filesystem'
-  , filename: '_session_store.json'
+    store: 'cookie'
   , key: 'sid'
   , expiry: 14 * 24 * 60 * 60
   }
