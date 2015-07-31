@@ -56,11 +56,11 @@
                       </div>
                       <div class="modal-body">
                           <% if (device.checkedOut) {%>
-                            <form id="device-form" class="form-horizontal" action="/devices/<%= device.udid %>/checkin?_method=POST" method="POST">
+                            <form id="device-form" class="form-horizontal" action="/devices/<%= device.udid %>/checkin?_method=PUT" method="PUT">
                               <%- contentTag('input', 'Check-in device', {type: 'submit', class: 'btn btn-default btn-success btn-block'}) %>
                             </form>
                           <% } else {%>
-                            <form id="device-form" class="form-horizontal" action="/devices/<%= device.udid %>/checkout?_method=POST" method="POST">
+                            <form id="device-form" class="form-horizontal" action="/devices/<%= device.udid %>/checkout?_method=PUT" method="PUT">
                               <%- contentTag('input', 'Check-out device', {type: 'submit', class: 'btn btn-default btn-success btn-block'}) %>
                             </form>
                           <% } %>
