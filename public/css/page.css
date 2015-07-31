@@ -2,6 +2,11 @@ body {
   background: white;
 }
 
+mark {
+  background-color: #FFD9C0;
+  padding: 0px;
+}
+
 #main-container {
   width: 90%;
 }

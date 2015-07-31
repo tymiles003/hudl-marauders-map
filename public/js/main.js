@@ -56,7 +56,7 @@ function updateModalUser(userId) {
   var modalInput = document.getElementById("check-device-input");
   modalInput.type = "submit";
   modalInput.className = modalInput.className.replace("disabled", "")
-  
+
   var modalForm = document.getElementById("check-device-form");
   device_udid = modalForm.dataset.device_udid;
   device_checkedout = modalForm.dataset.device_checkedout;
@@ -86,7 +86,24 @@ function fuzzySearch(text, query) {
     }
     return true;
   });
-  return (res.length > 0);
+  return (res.length == query.split(' ').length);
+}
+
+function highlightWords() {
+  var searchDOM = document.getElementById('focusedInput');
+  var searchString = searchDOM.value;
+  searchString = searchString.trim();
+
+
+  var devices = document.getElementsByClassName("device-item");
+  Array.prototype.forEach.call(devices, function(device) {
+    var deviceLink = device.getElementsByTagName("a")[0];
+    Array.prototype.forEach.call(searchString.split(' '), function(term) {
+      if (term == '') {return;}
+
+      var tmpReplace = deviceLink.innerHTML.replace(term, "<mark>"+term+"</mark>");
+    });
+  });
 }
 
 function buildDeviceListDOM() {
@@ -141,14 +158,16 @@ function buildDeviceListDOM() {
           zoneElement = document.getElementById("device-zone-"+device.zone);
         }
 
-        var deviceDiv = document.createElement('li');
-        deviceDiv.innerHTML = '<a href="#" data-toggle="modal" class="'+(device.checkedOut ? "checked-out" : "checked-in")+'" data-target="#checkoutModal">'+device.name+'</a>';
-        var deviceElement = deviceDiv.getElementsByTagName("a")[0];
+        var deviceLi = document.createElement('li');
+        deviceLi.className = "device-item";
+        deviceLi.innerHTML = '<a href="#" data-toggle="modal" class="'+(device.checkedOut ? "checked-out" : "checked-in")+'" data-target="#checkoutModal">'+device.name+'</a>';
+        var deviceElement = deviceLi.getElementsByTagName("a")[0];
 
         deviceElement.onclick = function() {updateModal(device)};
 
-        zoneElement.appendChild(deviceDiv);
+        zoneElement.appendChild(deviceLi);
       }
     });
   }
+  highlightWords();
 }
