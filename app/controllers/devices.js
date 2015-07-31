@@ -125,6 +125,10 @@ var Devices = function () {
           device.name = params.name;
           geddy.log.info("updated device " + device.udid + " name to: " + device.name);
         }
+        if (params.office !== undefined) {
+          device.office = params.office;
+          geddy.log.info("updated device " + device.udid + " office to: " + device.office);
+        }
         if (params.zone !== undefined) {
           device.zone = params.zone;
           geddy.log.info("updated device " + device.udid + " zone to: " + device.zone);
