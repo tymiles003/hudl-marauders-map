@@ -31,7 +31,7 @@ function updateModal(device) {
   var checkString = (device.checkedOut ? "checkin" : "checkout");
 
   var modalForm = document.getElementById("check-device-form");
-  modalForm.action = "/devices/"+device.udid+"/"+checkString+"?_method=POST";
+  modalForm.action = "/devices/"+device.udid+"/"+checkString+"?_method=PUT";
 
   var modalInput = document.getElementById("check-device-input");
   modalInput.value = checkString + " device";
