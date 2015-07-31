@@ -35,7 +35,7 @@ function updateModal(device) {
   modalForm.dataset.device_checkedout = device.checkedOut;
 
   var modalInput = document.getElementById("check-device-input");
-  modalInput.value = checkString + " device";
+  modalInput.value = checkString;
 
   // clear the select
   var selectize = $('#user-select')[0].selectize;
@@ -53,6 +53,10 @@ function updateModal(device) {
 }
 
 function updateModalUser(userId) {
+  var modalInput = document.getElementById("check-device-input");
+  modalInput.type = "submit";
+  modalInput.className = modalInput.className.replace("disabled", "")
+  
   var modalForm = document.getElementById("check-device-form");
   device_udid = modalForm.dataset.device_udid;
   device_checkedout = modalForm.dataset.device_checkedout;
