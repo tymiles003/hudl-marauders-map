@@ -105,6 +105,9 @@ var Devices = function () {
           geddy.log.info("updating device user");
           device.user = user;
         }
+        if (params.name !== undefined) {
+          device.name = params.name;
+        }
         if (params.zone !== undefined) {
           geddy.log.info("updating device zone");
           device.zone = params.zone;
