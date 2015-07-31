@@ -95,7 +95,8 @@ var Devices = function () {
         geddy.log.error("an error occurred while querying device during device update");
         throw err;
       }
-      geddy.model.Device.first(params.userId, function(err, user) {
+      geddy.log.info("attempting to update (potentially null) user: " + params.userId);
+      geddy.model.User.first(params.userId, function(err, user) {
         if (err) {
           geddy.log.error("an error occurred while querying user during device update");
           throw err;
