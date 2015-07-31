@@ -21,14 +21,15 @@ var Devices = function () {
       , device = geddy.model.Device.create(params);
 
     if (!device.isValid()) {
-      this.respondWith(device);
+      geddy.log.error("provided device params are invalid");
+      self.respondWith(device);
     }
     else {
       device.save(function(err, data) {
         if (err) {
           throw err;
         }
-        self.respondWith(device, {status: err});
+        self.respond(device, {format: 'json'});
       });
     }
   };
