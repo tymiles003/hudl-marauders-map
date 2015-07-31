@@ -133,6 +133,7 @@ var Devices = function () {
 
     geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
+        geddy.log.error("error retrieving device for checkin");
         throw err;
       }
 
@@ -146,8 +147,12 @@ var Devices = function () {
       } else {
         device.save(function(err, data) {
           if (err) {
+            geddy.log.error("error saving device during checkout");
             throw err;
           }
+          geddy.log.debug("all looks well, about to respond");
+          // self.respond(self.response, {format: 'json'});
+          // self.respond(null, {statusCode: 200});
           self.respondWith(device);
         });
       }
@@ -159,6 +164,7 @@ var Devices = function () {
 
     geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
+        geddy.log.error("error retrieving device for checkin");
         throw err;
       }
 
@@ -171,8 +177,12 @@ var Devices = function () {
       } else {
         device.save(function(err, data) {
           if (err) {
+            geddy.log.error("error saving device during checkout");
             throw err;
           }
+          geddy.log.debug("all looks well, about to respond");
+          // self.respond(self.response, {format: 'json'});
+          // self.respond(null, {statusCode: 200});
           self.respondWith(device);
         });
       }
