@@ -36,6 +36,20 @@ function updateModal(device) {
 
   var modalInput = document.getElementById("check-device-input");
   modalInput.value = checkString + " device";
+
+  // clear the select
+  var selectize = $('#user-select')[0].selectize;
+  selectize.clear();
+
+  modalInput.className = modalInput.className.replace("disabled", "")
+  modalInput.type = "";
+  if (!device.checkedOut) {
+    modalInput.className = modalInput.className + " disabled";
+  }
+  else {
+    selectize.addItem(device.user.id);
+    modalInput.type = "submit";
+  }
 }
 
 function updateModalUser(userId) {
