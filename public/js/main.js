@@ -31,10 +31,23 @@ function updateModal(device) {
   var checkString = (device.checkedOut ? "checkin" : "checkout");
 
   var modalForm = document.getElementById("check-device-form");
-  modalForm.action = "/devices/"+device.udid+"/"+checkString+"?_method=PUT";
+  modalForm.dataset.device_udid = device.udid;
+  modalForm.dataset.device_checkedout = device.checkedOut;
 
   var modalInput = document.getElementById("check-device-input");
   modalInput.value = checkString + " device";
+}
+
+function updateModalUser(userId) {
+  var modalForm = document.getElementById("check-device-form");
+  device_udid = modalForm.dataset.device_udid;
+  device_checkedout = modalForm.dataset.device_checkedout;
+
+  console.log(device_udid);
+  console.log(device_checkedout);
+  console.log(userId);
+
+  modalForm.action = "/devices/"+device_udid+"/"+device_checkedout+"?_method=PUT";
 }
 
 function updateSearch(event) {
