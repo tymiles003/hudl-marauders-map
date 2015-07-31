@@ -20,7 +20,7 @@ var Main = function () {
   this.index = function (req, resp, params) {
 
     // get all devices
-    var allDevices;
+    var allDevices, allUsers;
     geddy.model.Device.all(function(err, devices) {
       if (err) {
         throw err;
@@ -28,10 +28,18 @@ var Main = function () {
       allDevices = devices;
     });
 
+    geddy.model.User.all(function(err, users) {
+      if (err) {
+        throw err;
+      }
+      allUsers = users;
+    })
+
     // get all platforms for devices
     var devicePlatforms = new Set();
     // get all offices for devices
     var deviceOffices = new Set();
+    
     if (allDevices) {
       Array.prototype.forEach.call(allDevices, function(device) {
         devicePlatforms.add(device.platform);
@@ -39,7 +47,12 @@ var Main = function () {
       });
     }
 
-    this.respond({params: params, devices: allDevices, devicePlatforms: devicePlatforms, deviceOffices: deviceOffices}, {
+    this.respond({params: params,
+                  devices: allDevices,
+                  devicePlatforms: devicePlatforms,
+                  deviceOffices: deviceOffices,
+                  users: allUsers,
+                  }, {
       format: 'html'
     , template: 'app/views/main/index'
     });

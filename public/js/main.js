@@ -24,6 +24,19 @@ function clickPill(element) {
   buildDeviceListDOM();
 }
 
+function updateModal(device) {
+  var modalTitle = document.getElementById("modal-title");
+  modalTitle.innerHTML = device.name;
+
+  var checkString = (device.checkedOut ? "checkin" : "checkout");
+
+  var modalForm = document.getElementById("check-device-form");
+  modalForm.action = "/devices/"+device.udid+"/"+checkString+"?_method=POST";
+
+  var modalInput = document.getElementById("check-device-input");
+  modalInput.value = checkString + " device";
+}
+
 function buildDeviceListDOM() {
 
   // get all devices
@@ -72,9 +85,14 @@ function buildDeviceListDOM() {
           // otherwise, just grab one that already exists
           zoneElement = document.getElementById("device-zone-"+device.zone);
         }
-        var deviceElement = document.createElement('h4');
-        deviceElement.innerHTML = device.name;
-        zoneElement.appendChild(deviceElement);
+
+        var deviceDiv = document.createElement('div');
+        deviceDiv.innerHTML = '<a href="#" data-toggle="modal" class="'+(device.checkedOut ? "checked-out" : "checked-in")+'" data-target="#checkoutModal">'+device.name+'</a>';
+        var deviceElement = deviceDiv.getElementsByTagName("a")[0];
+
+        deviceElement.onclick = function() {updateModal(device)};
+
+        zoneElement.appendChild(deviceDiv);
       }
     });
   }
