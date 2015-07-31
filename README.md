@@ -43,7 +43,7 @@ All the other stuff is handle via good ol' fashioned Swift and JavaScript :D
  problems getting the production version (using MongoDB) running due to the ORM. Getting prod running would be dandy.
  - [ ] Deploying this somewhere more accessible than [104.131.19.33:4000](http://104.131.19.33:4000) would be great as
  well :D
- - [ ]More iBeacons would make The Map more useful. All you have to do is add the iBeacon to the app, tune its strength,
+ - [ ] More iBeacons would make The Map more useful. All you have to do is add the iBeacon to the app, tune its strength,
  and update the map image.
 
 ### Credits
