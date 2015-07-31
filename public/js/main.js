@@ -43,11 +43,9 @@ function updateModalUser(userId) {
   device_udid = modalForm.dataset.device_udid;
   device_checkedout = modalForm.dataset.device_checkedout;
 
-  console.log(device_udid);
-  console.log(device_checkedout);
-  console.log(userId);
+  var checkOut = (device_checkedout == 'true') ? false : true;
 
-  modalForm.action = "/devices/"+device_udid+"/"+device_checkedout+"?_method=PUT";
+  modalForm.action = "/devices/"+device_udid+"?checkedOut="+checkOut+"&userId="+userId+"&_method=POST";
 }
 
 function updateSearch(event) {

@@ -118,6 +118,7 @@ var Devices = function () {
           if (device.checkedOut == 'true') {
             device.checkoutTime = new Date();
           } else {
+            geddy.log.info("checking in device");
             device.checkoutTime = null;
             device.user = null;
           }
