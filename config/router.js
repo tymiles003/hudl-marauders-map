@@ -43,11 +43,11 @@ router.get('/devices/add(.:format)').to('devices.add')
 router.get('/devices/:udid(.:format)').to('devices.show')
 router.get('/devices/:udid/edit(.:format)').to('devices.edit')
 router.post('/devices(.:format)').to('devices.create')
-router.post('/devices/:udid(.:format)').to('devices.update')
+router.put('/devices/:udid(.:format)').to('devices.update')
 router.del('/devices/:udid(.:format)').to('devices.destroy')
 
-router.post('/devices/:udid(.:format)/checkout').to('devices.checkout')
-router.post('/devices/:udid(.:format)/checkin').to('devices.checkin')
+router.put('/devices/:udid/checkout').to('devices.checkout')
+router.put('/devices/:udid/checkin').to('devices.checkin')
 
 router.resource('users');
 
