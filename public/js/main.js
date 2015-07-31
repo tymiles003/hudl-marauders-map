@@ -43,10 +43,6 @@ function updateModalUser(userId) {
   device_udid = modalForm.dataset.device_udid;
   device_checkedout = modalForm.dataset.device_checkedout;
 
-  console.log(device_udid);
-  console.log(device_checkedout);
-  console.log(userId);
-
   modalForm.action = "/devices/"+device_udid+"/"+device_checkedout+"?_method=PUT";
 }
 
@@ -102,7 +98,7 @@ function buildDeviceListDOM() {
       return (device.platform == (platformString == "All" ? device.platform : platformString)) &&
                 (device.office == (officeString == "All" ? device.office : officeString)) &&
                 (device.checkedOut == (availabilityString == "All" ? device.checkedOut : (availabilityString=="Checked Out"))) &&
-                (fuzzySearch(device.name+device.platform+device.osVersion+device.office+device.zone+device.description, searchString))
+                (fuzzySearch(device.name+device.platform+device.osVersion+device.office+device.zone, searchString))
     });
     devices.forEach( function(device) {
       if (device.zone != undefined) {
@@ -110,12 +106,13 @@ function buildDeviceListDOM() {
         if (document.getElementById("device-zone-"+device.zone) == undefined) {
           // create our zone container div
           zoneElement = document.createElement('div');
-          zoneElement.className = "zone-container";
+          zoneElement.className = "zone-container nav nav-pills nav-stacked";
           zoneElement.id = "device-zone-"+device.zone;
           zoneElement.onmouseover = function() {zoneOver(device.zone)};
-          zoneElement.onmouseout =  function() {zoneOver('')};
-          var zoneHeader = document.createElement('h3');
-          zoneHeader.innerHTML = device.zone;
+          zoneElement.onmouseout = function() {zoneOver('')};
+          var zoneHeader = document.createElement('li');
+          zoneHeader.className = "active";
+          zoneHeader.innerHTML = '<a href="#">'+device.zone+'</a>';
           zoneElement.appendChild(zoneHeader);
           deviceList.appendChild(zoneElement);
         }
@@ -124,7 +121,7 @@ function buildDeviceListDOM() {
           zoneElement = document.getElementById("device-zone-"+device.zone);
         }
 
-        var deviceDiv = document.createElement('div');
+        var deviceDiv = document.createElement('li');
         deviceDiv.innerHTML = '<a href="#" data-toggle="modal" class="'+(device.checkedOut ? "checked-out" : "checked-in")+'" data-target="#checkoutModal">'+device.name+'</a>';
         var deviceElement = deviceDiv.getElementsByTagName("a")[0];
 
