@@ -46,9 +46,6 @@ router.post('/devices(.:format)').to('devices.create')
 router.post('/devices/:udid(.:format)').to('devices.update')
 router.del('/devices/:udid(.:format)').to('devices.destroy')
 
-router.post('/devices/:udid/checkout').to('devices.checkout')
-router.post('/devices/:udid/checkin').to('devices.checkin')
-
 router.resource('users');
 
 exports.router = router;

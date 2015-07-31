@@ -134,67 +134,6 @@ var Devices = function () {
     });
   };
 
-  this.checkout = function (req, resp, params) {
-    var self = this;
-
-    geddy.model.Device.first({udid: params.udid}, function(err, device) {
-      if (err) {
-        geddy.log.error("error retrieving device for checkin");
-        throw err;
-      }
-
-      if (!device.checkedOut) {
-        device.checkedOut = true;
-        device.checkoutTime = new Date();
-      }
-
-      if (!device.isValid()) {
-        geddy.log.error("error updating device during checkout");
-      } else {
-        device.save(function(err, data) {
-          if (err) {
-            geddy.log.error("error saving device during checkout");
-            throw err;
-          }
-          geddy.log.debug("all looks well, about to respond");
-          // self.respond(self.response, {format: 'json'});
-          // self.respond(null, {statusCode: 200});
-          self.respondWith(device);
-        });
-      }
-    });
-  }
-
-  this.checkin = function (req, resp, params) {
-    var self = this;
-
-    geddy.model.Device.first({udid: params.udid}, function(err, device) {
-      if (err) {
-        geddy.log.error("error retrieving device for checkin");
-        throw err;
-      }
-
-      if (device.checkedOut) {
-        device.checkedOut = false;
-      }
-
-      if (!device.isValid()) {
-        geddy.log.error("error updating device during checkin");
-      } else {
-        device.save(function(err, data) {
-          if (err) {
-            geddy.log.error("error saving device during checkout");
-            throw err;
-          }
-          geddy.log.debug("all looks well, about to respond");
-          // self.respond(self.response, {format: 'json'});
-          // self.respond(null, {statusCode: 200});
-          self.respondWith(device);
-        });
-      }
-    });
-  }
-
 };
 
 exports.Devices = Devices;
