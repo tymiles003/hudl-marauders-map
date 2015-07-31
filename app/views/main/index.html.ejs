@@ -2,6 +2,9 @@
   localStorage.devices = '[<%- devices %>]';
   document.addEventListener("DOMContentLoaded", function() {
     buildDeviceListDOM();
+    $('#user-select').selectize({
+
+    });
   });
 </script>
 <div class="row">
@@ -54,10 +57,18 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 id="modal-title" class="modal-title"></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="height:200px">
         <form id="check-device-form" class="form-horizontal hide-form" method="POST">
           <input id="check-device-input" class="btn btn-default btn-success btn-block" type="submit" value="">
         </form>
+        <select id="user-select" placeholder="Select a hudlie">
+          <option value=""></option>
+          <% if(users) { %>
+            <% Array.prototype.forEach.call(users, function(user) { %>
+              <option value="<%- user.firstName %> <%- user.lastName %>"><%- user.firstName + ' ' + user.lastName %></option>
+            <% }); %>
+          <% } %>
+        </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
