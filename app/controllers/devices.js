@@ -92,9 +92,37 @@ var Devices = function () {
 
     geddy.model.Device.first({udid: params.udid}, function(err, device) {
       if (err) {
+        geddy.log.error("an error occurred while querying device during device update");
         throw err;
       }
-      device.updateProperties(params);
+      geddy.log.info("attempting to update (potentially null) user: " + params.userId);
+      geddy.model.User.first(params.userId, function(err, user) {
+        if (err) {
+          geddy.log.error("an error occurred while querying user during device update");
+          throw err;
+        }
+        if (user !== undefined) {
+          geddy.log.info("updating device user");
+          device.user = user;
+        }
+        if (params.name !== undefined) {
+          device.name = params.name;
+        }
+        if (params.zone !== undefined) {
+          geddy.log.info("updating device zone");
+          device.zone = params.zone;
+        }
+        if (params.checkedOut !== undefined) {
+          geddy.log.info("updating device checkout status");
+          device.checkedOut = params.checkedOut;
+          if (device.checkedOut == 'true') {
+            device.checkoutTime = new Date();
+          } else {
+            device.checkoutTime = null;
+            device.user = null;
+          }
+        }
+      });
 
       if (!device.isValid()) {
         geddy.log.error("invalid device to update");
