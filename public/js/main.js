@@ -101,7 +101,7 @@ function highlightWords() {
     Array.prototype.forEach.call(searchString.split(' '), function(term) {
       if (term == '') {return;}
 
-      var tmpReplace = deviceLink.innerHTML.replace(term, "<mark>"+term+"</mark>");
+      deviceLink.innerHTML = deviceLink.innerHTML.replace(term, "<mark>"+term+"</mark>");
     });
   });
 }
