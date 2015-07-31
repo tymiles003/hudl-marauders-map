@@ -116,7 +116,7 @@ var Devices = function () {
           geddy.log.error("an error occurred while querying user during device update. userId: " + params.userId);
           throw err;
         }
-        if (user !== undefined && params.checkedOut !== undefined) {
+        if (user !== undefined && params.checkedOut == "true") {
           device.user = user;
           geddy.log.info("updated device " + device.udid + " user to:");
           console.log(device.user);
