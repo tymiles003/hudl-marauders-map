@@ -1,0 +1,42 @@
+body {
+  background: white;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+  background-color: #FF7518;
+}
+
+.panel-title {
+  font-weight: bold;
+}
+
+#focusedInput {
+  height: 3em;
+  margin-bottom: -1em;
+  border: 0px;
+}
+
+/* add the search icon, taken from stackoverflow:
+  http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box
+*/
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .fa {
+  left: 0px;
+  z-index: 2;
+}
+
+/* add padding  */
+input {
+  padding-left: 30px !important;
+}
