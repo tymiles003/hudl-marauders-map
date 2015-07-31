@@ -37,6 +37,29 @@ function updateModal(device) {
   modalInput.value = checkString + " device";
 }
 
+function updateSearch(event) {
+  var word = document.getElementById('focusedInput').value;
+  if (word.includes('<') || word.includes('>')){
+    document.getElementById('focusedInput').value = word.replace(/[\>\<]/gi,"");
+  }
+  buildDeviceListDOM();
+}
+
+function fuzzySearch(text, query) {
+  if (query == "") {
+    return true;
+  }
+  query = query.toLowerCase().trim();
+  text = text.toLowerCase();
+  var res = query.split(' ').filter( function(q) {
+    if (text.indexOf(q) == -1) {
+      return false;
+    }
+    return true;
+  });
+  return (res.length > 0);
+}
+
 function buildDeviceListDOM() {
 
   // get all devices
@@ -58,13 +81,15 @@ function buildDeviceListDOM() {
   var availabilityString = availabilityDOM.getElementsByClassName("active")[0].textContent;
 
   // check the search
-
+  var searchDOM = document.getElementById('focusedInput');
+  var searchString = searchDOM.value;
 
   if(devices) {
     devices = devices.filter( function(device) {
       return (device.platform == (platformString == "All" ? device.platform : platformString)) &&
                 (device.office == (officeString == "All" ? device.office : officeString)) &&
-                (device.checkedOut == (availabilityString == "All" ? device.checkedOut : (availabilityString=="Checked Out")))
+                (device.checkedOut == (availabilityString == "All" ? device.checkedOut : (availabilityString=="Checked Out"))) &&
+                (fuzzySearch(device.name+device.platform+device.osVersion+device.office+device.zone+device.description, searchString))
     });
     devices.forEach( function(device) {
       if (device.zone != undefined) {
