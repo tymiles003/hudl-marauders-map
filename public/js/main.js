@@ -28,7 +28,7 @@ function updateModal(device) {
   var modalTitle = document.getElementById("modal-title");
   modalTitle.innerHTML = device.name;
 
-  var checkString = (device.checkedOut ? "checkin" : "checkout");
+  var checkString = (device.checkedOut ? "Check in this device" : "Check out this device");
 
   var modalForm = document.getElementById("check-device-form");
   modalForm.dataset.device_udid = device.udid;

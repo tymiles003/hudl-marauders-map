@@ -135,7 +135,14 @@ var Devices = function () {
             geddy.log.error("problem saving updates to device");
             throw err;
           }
-          self.respondWith(device, {statusCode:200, format: 'json'});
+          self.respondTo({
+            html: function() {
+              self.redirect('/');
+            },
+            json: function() {
+              self.respond(device, {statusCode: 200, format: 'json'});
+            }
+          });
         });
       }
     });
